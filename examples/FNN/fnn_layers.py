@@ -1,12 +1,6 @@
-'''
-Created on 2021年2月13日
-
-@author: 95108
-'''
-
-'''
+"""
 编写一个两层的神经网络，用于训练
-'''
+"""
 
 import numpy as np
 from packages.activators import *
@@ -45,7 +39,7 @@ class FNN:
         self.Loss = Loss
         self.LossDeriv = LossDeriv
         self.learnRate = 1
-        self.maxEpoch = 500
+        self.maxEpoch = 5000
 
     def forwardPropagation(self, inputData, y):
         # 正向计算神经网络，输出每一层的激活
@@ -103,6 +97,8 @@ class FNN:
         losses = []
         while True:
             epoch += 1
+            if (epoch + 1) % 100 == 0:
+                print("have trained " + str(epoch + 1) + " epochs")
             dW, db = [], []
             lossTotal = 0
             for j in range(n):
@@ -167,18 +163,18 @@ def testnumpy():
 
 def testTrain():
     L = 2
-    Mls = [10, 1]
+    Mls = [20, 1]
     Funcs = [sigmoid, pureline]
     Derivs = [sigmoidp, purelinep]
     dimInput = 1
     Loss = loss.square
     LossDeriv = loss.squared
     network = FNN(L, Mls, Funcs, Derivs, dimInput, Loss, LossDeriv)
-    network.setLearnRate(0.05)
+    network.setLearnRate(0.01)
 
     inputData = [[0.01 * i] for i in range(400)]
     Y = [np.sin(x[0]) for x in inputData]
-    print(Y)
+    # print(Y)
     inputData = np.array(inputData).T
     epoch, losses = (network.train(None, inputData, Y, 1e-5))
     # zs, outputs, lossValue = network.forwardPropagation([1], np.sin(1))
@@ -215,7 +211,7 @@ def test_gradient():
 
     inputData = np.asarray([1, 2]).T
     y = 0
-    print(network.predict(inputData))
+    # print(network.predict(inputData))
 
     def func(W):
         return network.loss(inputData, y)
