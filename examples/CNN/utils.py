@@ -19,6 +19,7 @@ def load_data(flatten=False, onehot=False):
 
 
 if __name__ == '__main__':
-    _, labels, _, _ = load_data(flatten=True, onehot=True)
+    _, labels, _, _ = load_data(flatten=True, onehot=False)
     for i in range(10):
         print(labels[i])
+    # readimage.read_testing_data()

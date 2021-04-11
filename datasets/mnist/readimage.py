@@ -32,6 +32,8 @@ def read_image(filename, flatten=False):
         images[i] = np.array(struct.unpack_from(fmt_image, f, offset)).reshape((num_rows, num_cols))
         offset += struct.calcsize(fmt_image)
 
+    if flatten:
+        return images.reshape(num_images, num_cols)
     return images
 
 
@@ -58,21 +60,32 @@ def read_labels(filename, onehot=False):
 
 
 def read_training_data(flatten=False):
-    return read_image(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\train-images.idx3-ubyte', flatten)
+    s = (os.path.join(os.path.dirname(__file__), "train-images.idx3-ubyte"))
+    s = s.replace("\\", "/")
+    return read_image(s, flatten)
+    # return read_image(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\train-images.idx3-ubyte', flatten)
 
 
 def read_training_labels(onehot=False):
-    labels = read_labels(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\train-labels.idx1-ubyte', onehot)
+    s = (os.path.join(os.path.dirname(__file__), "train-labels.idx1-ubyte"))
+    s = s.replace("\\", "/")
+    return read_labels(s, onehot)
+    # labels = read_labels(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\train-labels.idx1-ubyte', onehot)
 
-    return labels
 
 
 def read_testing_data(flatten=False):
-    return read_image(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\t10k-images.idx3-ubyte', flatten)
+    s = (os.path.join(os.path.dirname(__file__), "t10k-images.idx3-ubyte"))
+    s = s.replace("\\", "/")
+    return read_image(s, flatten)
+    # return read_image(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\t10k-images.idx3-ubyte', flatten)
 
 
 def read_testing_labels(onehot=False):
-    return read_labels(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\t10k-labels.idx1-ubyte', onehot)
+    s = (os.path.join(os.path.dirname(__file__), "t10k-labels.idx1-ubyte"))
+    s = s.replace("\\", "/")
+    return read_labels(s, onehot)
+    # return read_labels(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\t10k-labels.idx1-ubyte', onehot)
 
 
 def test_read_training_data():
@@ -86,4 +99,6 @@ def test_read_training_data():
 
 
 if __name__ == '__main__':
-    test_read_training_data()
+    # test_read_training_data()
+    read_testing_data()
+    open("train-images.idx3-ubyte", 'rb')
