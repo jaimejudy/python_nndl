@@ -58,21 +58,28 @@ def read_labels(filename, onehot=False):
 
 
 def read_training_data(flatten=False):
-    return read_image(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\train-images.idx3-ubyte', flatten)
+    return read_image(r'D:\workspace\pycharm\p03_nndl\datasets\mnist\train-images.idx3-ubyte', flatten)
 
 
 def read_training_labels(onehot=False):
-    labels = read_labels(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\train-labels.idx1-ubyte', onehot)
-
+    labels = read_labels(r'D:\workspace\pycharm\p03_nndl\datasets\mnist\train-labels.idx1-ubyte', onehot)
     return labels
 
 
 def read_testing_data(flatten=False):
-    return read_image(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\t10k-images.idx3-ubyte', flatten)
+    return read_image(r'D:\workspace\pycharm\p03_nndl\datasets\mnist\t10k-images.idx3-ubyte', flatten)
 
 
 def read_testing_labels(onehot=False):
-    return read_labels(r'D:\workspace\eclipse\PyProject22_nndl\datasets\mnist\t10k-labels.idx1-ubyte', onehot)
+    return read_labels(r'D:\workspace\pycharm\p03_nndl\datasets\mnist\t10k-labels.idx1-ubyte', onehot)
+
+
+def read_mnist(flatten=False, onehot=False):
+    train_data = read_training_data(flatten)
+    train_label = read_training_labels(onehot)
+    test_data = read_testing_data(flatten)
+    test_label = read_testing_labels(onehot)
+    return train_data, train_label, test_data, test_label
 
 
 def test_read_training_data():
